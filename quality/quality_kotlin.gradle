@@ -1,0 +1,47 @@
+apply {
+    plugin("io.gitlab.arturbosch.detekt")
+    plugin("org.jlleitschuh.gradle.ktlint")
+}
+
+ktlint {
+    debug.set(false)
+    version.set("0.41.0")
+    verbose.set(true)
+    android.set(true)
+    outputToConsole.set(true)
+    ignoreFailures.set(false)
+    enableExperimentalRules.set(false)
+//    baseline = file("$projectDir/quality/config/ktlint/ktlint-baseline.xml")
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+    reporters {
+        reporter "checkstyle"
+        reporter "plain"
+        customReporters {
+            "html" {
+                fileExtension = "html"
+                dependency = "me.cassiano:ktlint-html-reporter:0.2.3"
+            }
+        }
+    }
+}
+
+detekt {
+    buildUponDefaultConfig = true // preconfigure defaults
+    allRules = false // activate all available (even unstable) rules.
+    // point to your custom config defining rules to run, overwriting default behavior
+    config = rootProject.files("quality/config/detekt/detekt.yml")
+    // a way of suppressing issues before introducing detekt
+//    baseline = file("$projectDir/config/detekt/detekt-baseline.xml")
+    
+    reports {
+        html {
+            enabled = true
+
+            // observe findings in your browser with structure and code snippets.
+            destination = file("$project.buildDir/reports/detekt.html")
+        }
+    }
+}
