@@ -3,7 +3,6 @@ package com.gmartin.mlevaluation.data.api
 import com.gmartin.mlevaluation.model.Product
 import org.koin.core.component.KoinComponent
 
-
 /**
  * @author Guillermo O. Martín
  *
