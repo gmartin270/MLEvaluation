@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/productThumbnail"
+        android:layout_width="@dimen/product_item_thumbnail_layout_width"
+        android:layout_height="@dimen/product_item_thumbnail_layout_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/productTitle"
+        android:layout_width="@dimen/product_item_title_text_layout_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/product_item_title_margin_top"
+        android:layout_marginStart="@dimen/product_item_title_margin_start"
+        android:layout_marginEnd="@dimen/product_item_title_margin_end"
+        android:textSize="@dimen/product_item_title_text_size"
+        android:maxLines="@integer/product_title_text_max_lines"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/productThumbnail"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textIsSelectable="false"
+        tools:text="Product XYZ" />
+
+    <TextView
+        android:id="@+id/productPrice"
+        android:textSize="@dimen/product_item_price_text_size"
+        android:textStyle="bold"
+        android:layout_width="@dimen/product_item_price_text_layout_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/product_item_price_margin_top"
+        android:layout_marginStart="@dimen/product_item_price_margin_start"
+        android:layout_marginEnd="@dimen/product_item_price_margin_end"
+        app:layout_constraintStart_toEndOf="@+id/productThumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/productTitle"
+        android:textIsSelectable="false"
+        tools:text="$ 0.00"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

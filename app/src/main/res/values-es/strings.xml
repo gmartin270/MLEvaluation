@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Evaluación MercadoLibre</string>
+
+    <string name="product_detail_toolbar_title_text">Producto</string>
+</resources>

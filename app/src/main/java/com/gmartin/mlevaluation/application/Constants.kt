@@ -13,5 +13,5 @@ object Constants {
     const val FORCE_VERBOSITY = BuildConfig.FORCE_DEBUG
 
     // MercadoLibre base URL
-    const val URL_BASE = "https://api.mercadolibre.com/sites/MLA/"
+    const val URL_BASE = "https://api.mercadolibre.com/"
 }

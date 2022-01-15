@@ -1,30 +1,21 @@
 package com.gmartin.mlevaluation.utils
 
-/**
- * Data class for the status
- */
-data class StatusData<out T>(
-    val status: Status,
-    val data: T?,
-    val message: String?
-) {
-    companion object {
-        fun <T> success(data: T): StatusData<T> = StatusData(
-            status = Status.SUCCESS,
-            data = data,
-            message = null
-        )
+sealed class StatusData<out T> {
+    abstract val data: T?
+    abstract val message: String?
 
-        fun <T> error(data: T?, message: String): StatusData<T> = StatusData(
-            status = Status.ERROR,
-            data = data,
-            message = message
-        )
+    class Loading<out T>(
+        override val data: T? = null,
+        override val message: String? = null
+    ) : StatusData<T>()
 
-        fun <T> loading(data: T?): StatusData<T> = StatusData(
-            status = Status.LOADING,
-            data = data,
-            message = null
-        )
-    }
+    class Success<out T>(
+        override val data: T?,
+        override val message: String? = null
+    ) : StatusData<T>()
+
+    class Error<out T>(
+        override val data: T? = null,
+        override val message: String?
+    ) : StatusData<T>()
 }

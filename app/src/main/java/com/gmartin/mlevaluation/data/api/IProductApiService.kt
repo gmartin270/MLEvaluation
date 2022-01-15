@@ -1,8 +1,10 @@
 package com.gmartin.mlevaluation.data.api
 
+import com.gmartin.mlevaluation.model.Product
 import com.gmartin.mlevaluation.model.ProductResponseData
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
@@ -18,6 +20,12 @@ interface IProductApiService {
      * @param searchProduct A [String] value for the search pattern.
      * @return A [Response] instance with the [ProductResponseData] from the Mercado Libre endpoint.
      */
-    @GET("search?")
+    @GET("sites/MLA/search?")
     suspend fun getProducts(@Query("q") searchProduct: String): Response<ProductResponseData>
+
+    /**
+     * TODO
+     */
+    @GET("items/{id}")
+    suspend fun getProduct(@Path("id") id: String): Response<Product>
 }

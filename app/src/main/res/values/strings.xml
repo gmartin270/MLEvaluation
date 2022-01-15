@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MercadoLibre Evaluation</string>
+
+    <string name="product_detail_toolbar_title_text">Product</string>
 </resources>
