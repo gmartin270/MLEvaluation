@@ -9,14 +9,15 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,14 +35,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/productDetailContainer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/appToolbarView"
                 android:paddingStart="@dimen/product_detail_container_padding_start"
                 android:paddingTop="@dimen/product_detail_container_padding_start"
-                android:paddingEnd="@dimen/product_detail_container_padding_start">
+                android:paddingEnd="@dimen/product_detail_container_padding_start"
+                android:visibility="invisible">
 
                 <TextView
                     android:id="@+id/productTitle"
@@ -59,7 +61,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/picturesList"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
+                    android:layout_height="@dimen/product_detail_pictures_list_layout_height"
                     android:layout_marginBottom="@dimen/product_detail_pictures_list_margin_bottom"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,6 +83,17 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <include
+                android:id="@+id/errorPanelContainer"
+                layout="@layout/error_panel"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero_height"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appToolbarView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -93,6 +106,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

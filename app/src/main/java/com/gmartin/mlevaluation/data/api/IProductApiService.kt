@@ -17,15 +17,18 @@ interface IProductApiService {
     /**
      * Gets all products that matches with the product pattern passed through.
      *
-     * @param searchProduct A [String] value for the search pattern.
+     * @param searchPattern A [String] value for the search pattern.
      * @return A [Response] instance with the [ProductResponseData] from the Mercado Libre endpoint.
      */
     @GET("sites/MLA/search?")
-    suspend fun getProducts(@Query("q") searchProduct: String): Response<ProductResponseData>
+    suspend fun getProducts(@Query("q") searchPattern: String): Response<ProductResponseData>
 
     /**
-     * TODO
+     * Gets a [Product] item for the provided Id.
+     *
+     * @param productId The [Product] Id to be retrieved.
+     * @return A [Response] instance of [Product] type.
      */
     @GET("items/{id}")
-    suspend fun getProduct(@Path("id") id: String): Response<Product>
+    suspend fun getProduct(@Path("id") productId: String): Response<Product>
 }

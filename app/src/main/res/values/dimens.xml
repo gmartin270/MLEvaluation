@@ -3,6 +3,7 @@
     <item name="zero_width" type="dimen">0dp</item>
     <item name="zero_height" type="dimen">0dp</item>
 
+    <!-- Products list dimens -->
     <item name="search_box_width" type="dimen">@dimen/zero_width</item>
     <item name="search_box_margin_top" type="dimen">10dp</item>
     <item name="search_box_margin_bottom" type="dimen">10dp</item>
@@ -26,6 +27,7 @@
     <item name="product_item_price_margin_start" type="dimen">10dp</item>
     <item name="product_item_price_margin_end" type="dimen">10dp</item>
 
+    <!-- Product detail dimens -->
     <item name="product_detail_toolbar_height" type="dimen">45dp</item>
 
     <item name="product_detail_toolbar_title_text_size" type="dimen">8pt</item>
@@ -48,6 +50,19 @@
     <item name="product_detail_title_margin_bottom" type="dimen">15dp</item>
 
     <item name="product_detail_pictures_list_margin_bottom" type="dimen">15dp</item>
+    <item name="product_detail_pictures_list_layout_height" type="dimen">250dp</item>
 
     <item name="product_detail_price_text_size" type="dimen">14pt</item>
+
+    <!-- Error Panel dimens -->
+    <item name="error_panel_top_guideline_begin" type="dimen">300dp</item>
+    <item name="error_panel_bottom_guideline_begin" type="dimen">500dp</item>
+
+    <item name="error_panel_image_layout_width" type="dimen">60dp</item>
+    <item name="error_panel_image_layout_height" type="dimen">60dp</item>
+
+    <item name="error_panel_title_text_size" type="dimen">8pt</item>
+
+    <item name="error_panel_subtitle_text_size" type="dimen">6pt</item>
+
 </resources>

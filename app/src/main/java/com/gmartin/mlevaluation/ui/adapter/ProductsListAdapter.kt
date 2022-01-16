@@ -46,7 +46,9 @@ class ProductsListAdapter(
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
-         * TODO
+         * Binds the [ViewHolder] with an item in the list.
+         *
+         * @param product A [Product] instance element.
          */
         fun bind(product: Product) {
             itemBinding.productTitle.text = product.title

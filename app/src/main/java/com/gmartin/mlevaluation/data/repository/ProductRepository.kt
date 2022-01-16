@@ -1,19 +1,29 @@
 package com.gmartin.mlevaluation.data.repository
 
 import com.gmartin.mlevaluation.data.api.ProductApiAdapter
+import com.gmartin.mlevaluation.model.Product
 import org.koin.core.component.KoinComponent
 
 /**
- * TODO
+ * Repository class for Products.
+ *
+ * @author Guillermo O. Martin
  */
 class ProductRepository(private val productsApiAdapter: ProductApiAdapter) : KoinComponent {
     /**
-     * TODO
+     * Gets all products that matches with the search pattern.
+     *
+     * @param searchPattern A [String] value for the search pattern.
+     * @return A [Product] collection instance.
      */
-    suspend fun getProducts(search: String) = productsApiAdapter.getProducts(search)
+    suspend fun getProductsList(searchPattern: String) =
+        productsApiAdapter.getProductsList(searchPattern)
 
     /**
-     * TODO
+     * Gets a [Product] item for the provided Id.
+     *
+     * @param productId The [Product] Id to be retrieved.
+     * @return A [Product] instance.
      */
-    suspend fun getProduct(itemId: String) = productsApiAdapter.getProduct(itemId)
+    suspend fun getProduct(productId: String) = productsApiAdapter.getProduct(productId)
 }

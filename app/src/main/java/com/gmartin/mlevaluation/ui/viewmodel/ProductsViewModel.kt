@@ -1,15 +1,14 @@
 package com.gmartin.mlevaluation.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.gmartin.mlevaluation.data.repository.ProductRepository
-import com.gmartin.mlevaluation.model.ApiException
-import com.gmartin.mlevaluation.model.NetworkException
 import com.gmartin.mlevaluation.model.Product
+import com.gmartin.mlevaluation.utils.ErrorType
+import com.gmartin.mlevaluation.utils.ExceptionHelper
 import com.gmartin.mlevaluation.utils.StatusData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +34,7 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
         get() = _statusDataItemResult
 
     /**
-     * Method called when is performed the search action on the UI.
+     * Method called when the search action is performed on the UI.
      *
      * @param searchPattern A [String] pattern to be requested.
      */
@@ -45,17 +44,19 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
 
             try {
                 mProductsList = withContext(Dispatchers.IO) {
-                    mProductRepository.getProducts(searchPattern)
+                    mProductRepository.getProductsList(searchPattern)
                 } as ArrayList<Product>
 
-                setStatusDataSuccess()
-            } catch (apiException: ApiException) {
-                Log.d("Guille", "${apiException.code} - ${apiException.message}")
-            } catch (networkException: NetworkException) {
-                Log.d("Guille", "${networkException.message}")
+                if (mProductsList.isNotEmpty()) {
+                    setStatusDataSuccess()
+                } else {
+                    _statusDataProductsResult.value = StatusData.Error(
+                        errorType = ErrorType.ERROR
+                    )
+                }
             } catch (exception: Exception) {
-                Log.d("Guille", exception.message)
                 _statusDataProductsResult.value = StatusData.Error(
+                    errorType = ExceptionHelper.resolveError(exception),
                     message = exception.message ?: "Error Occurred!"
                 )
             }
@@ -63,7 +64,9 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
     }
 
     /**
-     * TODO
+     * Method called when an element is selected in the UI.
+     *
+     * @param productId The product Id.
      */
     fun onProductItemSelected(productId: String) {
         viewModelScope.launch(Dispatchers.Main) {
@@ -74,14 +77,9 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
                     mProductRepository.getProduct(productId)
                 }
                 _statusDataItemResult.value = StatusData.Success(data = product)
-                Log.d("GUILLE", "product: ${product.title}")
-            } catch (apiException: ApiException) {
-                Log.d("Guille", "${apiException.code} - ${apiException.message}")
-            } catch (networkException: NetworkException) {
-                Log.d("Guille", "${networkException.message}")
             } catch (exception: Exception) {
-                Log.d("Guille", exception.message)
                 _statusDataProductsResult.value = StatusData.Error(
+                    errorType = ExceptionHelper.resolveError(exception),
                     message = exception.message ?: "Error Occurred!"
                 )
             }
@@ -89,14 +87,15 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
     }
 
     /**
-     * TODO
+     * Method called on back event on the UI.
      */
-    fun onFragmentProductListStart() {
+    fun onBack() {
+        // We refresh the list of products on the UI.
         setStatusDataSuccess()
     }
 
     /**
-     * TODO
+     * Set the live data value for the success result.
      */
     private fun setStatusDataSuccess() {
         _statusDataProductsResult.value = StatusData.Success(data = mProductsList)

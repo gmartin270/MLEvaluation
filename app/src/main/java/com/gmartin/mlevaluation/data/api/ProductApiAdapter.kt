@@ -1,12 +1,11 @@
 package com.gmartin.mlevaluation.data.api
 
-import android.util.Log
-import com.gmartin.mlevaluation.model.ApiException
-import com.gmartin.mlevaluation.model.NetworkException
 import com.gmartin.mlevaluation.model.Product
-import com.gmartin.mlevaluation.utils.ExceptionFactory
+import com.gmartin.mlevaluation.model.exception.ApiException
 import org.koin.core.component.KoinComponent
-import retrofit2.HttpException
+
+private const val HTTP_NOT_FOUND_CODE = 404
+private const val UNKNOWN_EXCEPTION_TEXT = "Unknown exception"
 
 /**
  * @author Guillermo O. Martín
@@ -21,45 +20,40 @@ class ProductApiAdapter(private val mProductApiClient: ProductApiClient) : KoinC
      * Gets all products that matches with the search pattern at MercadoLibre and adapts the
      * response to the domain model of [Product] list.
      *
-     * @param searchProduct A [String] value for the search pattern.
+     * @param searchPattern A [String] value for the search pattern.
      * @return A [Product] collection instance.
      */
-    suspend fun getProducts(searchProduct: String): List<Product> {
-        val response = mProductApiClient.provideProductApi().getProducts(searchProduct)
+    suspend fun getProductsList(searchPattern: String): List<Product> {
+        val response = mProductApiClient.provideProductApi().getProducts(searchPattern)
 
-        try {
-            if (response.isSuccessful) {
-                return response.body()!!.productList
-            } else {
-                val apiError = response.errorBody()?.let { mProductApiClient.parseApiError(it) }
-                throw ApiException(
-                    apiError?.status ?: 404,
-                    apiError?.message ?: "Unknown exception"
-                )
-            }
-        } catch (exception: Exception) {
-            throw ExceptionFactory.resolveError(exception)
+        if (response.isSuccessful) {
+            return response.body()!!.productList
+        } else {
+            val apiError = response.errorBody()?.let { mProductApiClient.parseApiError(it) }
+            throw ApiException(
+                apiError?.status ?: HTTP_NOT_FOUND_CODE,
+                apiError?.message ?: UNKNOWN_EXCEPTION_TEXT
+            )
         }
     }
 
     /**
-     * TODO
+     * Gets a [Product] item for the provided Id.
+     *
+     * @param productId The [Product] Id to be retrieved.
+     * @return A [Product] instance.
      */
     suspend fun getProduct(productId: String): Product {
         val response = mProductApiClient.provideProductApi().getProduct(productId)
 
-        try {
-            if (response.isSuccessful) {
-                return response.body()!!
-            } else {
-                val apiError = response.errorBody()?.let { mProductApiClient.parseApiError(it) }
-                throw ApiException(
-                    apiError?.status ?: 404,
-                    apiError?.message ?: "Unknown exception"
-                )
-            }
-        } catch (exception: Exception) {
-            throw ExceptionFactory.resolveError(exception)
+        if (response.isSuccessful) {
+            return response.body()!!
+        } else {
+            val apiError = response.errorBody()?.let { mProductApiClient.parseApiError(it) }
+            throw ApiException(
+                apiError?.status ?: HTTP_NOT_FOUND_CODE,
+                apiError?.message ?: UNKNOWN_EXCEPTION_TEXT
+            )
         }
     }
 }

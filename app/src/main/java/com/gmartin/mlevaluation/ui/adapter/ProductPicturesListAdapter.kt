@@ -4,9 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.signature.ObjectKey
 import com.gmartin.mlevaluation.databinding.PictureItemBinding
 import com.gmartin.mlevaluation.model.Picture
 
+/**
+ * A [RecyclerView.Adapter] adapter class for list of [Picture] type.
+ *
+ * @author Guillermo O. Martín
+ */
 class ProductPicturesListAdapter(
     private val mProductPicturesList: List<Picture>
 ) : RecyclerView.Adapter<ProductPicturesListAdapter.ViewHolder>() {
@@ -42,10 +48,15 @@ class ProductPicturesListAdapter(
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         /**
-         * TODO
+         * Binds the [ViewHolder] with an item in the list.
+         *
+         * @param picture A [Picture] instance element.
          */
         fun bind(picture: Picture) {
-            Glide.with(itemView.context).load(picture.url).into(itemBinding.picture)
+            Glide.with(itemView.context)
+                .load(picture.url)
+                .signature(ObjectKey(System.currentTimeMillis().toString()))
+                .into(itemBinding.picture)
         }
     }
 }

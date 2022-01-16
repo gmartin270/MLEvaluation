@@ -29,4 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         mProductsViewModel = ViewModelProvider(this, mProductsViewModelFactory).get()
     }
+
+    /**
+     * @see [AppCompatActivity.onBackPressed].
+     */
+    override fun onBackPressed() {
+        mProductsViewModel.onBack()
+        super.onBackPressed()
+    }
 }
