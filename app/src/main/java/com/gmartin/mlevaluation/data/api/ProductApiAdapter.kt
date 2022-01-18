@@ -15,7 +15,6 @@ private const val UNKNOWN_EXCEPTION_TEXT = "Unknown exception"
  * @param mProductApiClient A [ProductApiClient] instance.
  */
 class ProductApiAdapter(private val mProductApiClient: ProductApiClient) : KoinComponent {
-
     /**
      * Gets all products that matches with the search pattern at MercadoLibre and adapts the
      * response to the domain model of [Product] list.

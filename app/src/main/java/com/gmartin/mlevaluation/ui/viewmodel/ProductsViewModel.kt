@@ -78,7 +78,7 @@ class ProductsViewModel(private val mProductRepository: ProductRepository) : Vie
                 }
                 _statusDataItemResult.value = StatusData.Success(data = product)
             } catch (exception: Exception) {
-                _statusDataProductsResult.value = StatusData.Error(
+                _statusDataItemResult.value = StatusData.Error(
                     errorType = ExceptionHelper.resolveError(exception),
                     message = exception.message ?: "Error Occurred!"
                 )
