@@ -26,13 +26,13 @@ buildscript {
          * When a new feature that involves a substantially change on the way how the user iterate
          * with the app. Or to release a brand new feature on your app.
          */
-        versionMajor = 0
+        versionMajor = 1
 
         /*
          * Minor:
          * When A new feature not related with the main function of the app has being released.
          */
-        versionMinor = 3
+        versionMinor = 0
 
         /*
          * Patch:
