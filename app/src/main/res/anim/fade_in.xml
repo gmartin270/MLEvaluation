@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha
+        android:duration="@integer/slide_in_duration"
+        android:fromAlpha="@integer/anim_alpha_from"
+        android:toAlpha="@integer/anim_alpha_to"/>
+</set>

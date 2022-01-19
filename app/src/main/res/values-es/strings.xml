@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Evaluación MercadoLibre</string>
+
+    <string name="product_detail_toolbar_title_text">Producto</string>
+
+    <string name="error_product_list_empty_title">No encontramos publicaciones</string>
+    <string name="error_product_list_empty_subtitle">Revisa que la palabra este bien escrita.</string>
+
+    <string name="error_network_title">¡Parece que no hay internet!</string>
+    <string name="error_network_subtitle">Revisa tu conexión para seguir navegando.</string>
+</resources>

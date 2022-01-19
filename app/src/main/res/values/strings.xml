@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MercadoLibre Evaluation</string>
+
+    <string name="product_detail_toolbar_title_text">Product</string>
+
+    <string name="error_product_list_empty_title">We did not find publications</string>
+    <string name="error_product_list_empty_subtitle">Check that the word is spelled correctly.</string>
+
+    <string name="error_network_title">It seems that there is no internet!</string>
+    <string name="error_network_subtitle">Check your connection to continue browsing.</string>
+
+</resources>
